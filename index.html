@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#174d3a">
     <meta name="description" content="Happy Smile Day Care — mazingira salama, ya upendo na ya kucheza kwa watoto kujifunza, kukua na kung'ara.">
     <title>Happy Smile Day Care</title>
-    <link rel="icon" type="image/png" href="assets/happy-smile-day-care-logo.png">
+    <link rel="icon" type="image/png" href="./assets/happy-smile-day-care-logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -91,7 +91,7 @@
         .avatar-stack span:nth-child(2) { background: #d8e9ce; }
         .avatar-stack span:nth-child(3) { background: #f5d2c9; }
         .hero-art { position: relative; min-height: 420px; }
-        .hero-photo { position: absolute; inset: 4px 14px 8px 32px; overflow: hidden; border: 7px solid #fff; border-radius: 48% 48% 34px 34px; background: linear-gradient(155deg, rgba(23,77,58,.02), rgba(23,77,58,.08)), url("assets/hero-classroom.jpg") center 42%/cover, #dcebdc; box-shadow: 0 20px 55px rgba(23, 77, 58, .18); }
+        .hero-photo { position: absolute; inset: 4px 14px 8px 32px; width: calc(100% - 46px); height: calc(100% - 12px); object-fit: cover; object-position: center 42%; overflow: hidden; border: 7px solid #fff; border-radius: 48% 48% 34px 34px; background: #dcebdc; box-shadow: 0 20px 55px rgba(23, 77, 58, .18); }
         .photo-badge { position: absolute; display: flex; align-items: center; gap: 10px; padding: 13px 16px; border: 2px solid #fff; border-radius: 18px; background: var(--white); box-shadow: var(--shadow); }
         .photo-badge strong { display: block; color: var(--green); font: 800 .9rem "Nunito", sans-serif; }
         .photo-badge small { color: var(--muted); font-size: .76rem; }
@@ -290,7 +290,7 @@
     <header class="site-header">
         <div class="container nav-wrap">
             <a class="brand" href="#home" aria-label="Happy Smile Day Care — Mwanzo">
-                <img class="brand-mark" src="assets/happy-smile-day-care-logo.png" alt="Nembo ya Happy Smile Day Care" width="62" height="62">
+                <img class="brand-mark" src="./assets/happy-smile-day-care-logo.png" alt="Nembo ya Happy Smile Day Care" width="62" height="62">
                 <span class="brand-copy"><strong>Happy Smile</strong><span>Day Care</span></span>
             </a>
             <button class="menu-toggle" type="button" aria-label="Fungua menyu" aria-expanded="false" aria-controls="main-nav">☰</button>
@@ -321,7 +321,7 @@
                     </div>
                 </div>
                 <div class="hero-art" role="img" aria-label="Mtoto akijifunza maumbo darasani">
-                    <div class="hero-photo"></div>
+                    <img class="hero-photo" src="./assets/hero-classroom.jpg" alt="Watoto wakijifunza maumbo darasani" width="1056" height="1144" fetchpriority="high" decoding="async">
                     <span class="sun-doodle" aria-hidden="true">✳</span>
                     <div class="photo-badge top"><span class="badge-icon" aria-hidden="true">🧩</span><span><strong>Kujifunza kwa vitendo</strong><small>Ugunduzi kila siku</small></span></div>
                     <div class="photo-badge bottom"><span class="badge-icon" aria-hidden="true">💚</span><span><strong>Mtoto kwanza</strong><small>Kukua kwa kujiamini</small></span></div>
@@ -443,7 +443,7 @@
                 </div>
                 <div class="staff-grid">
                     <article class="staff-card">
-                        <div class="staff-photo"><img src="assets/regina-mrosso.jpg" alt="Picha ya Regina Mrosso, Mwalimu Mkuu" width="132" height="132" loading="lazy"></div>
+                        <div class="staff-photo"><img src="./assets/regina-mrosso.jpg" alt="Picha ya Regina Mrosso, Mwalimu Mkuu" width="132" height="132" loading="lazy" decoding="async"></div>
                         <h3>Regina Mrosso</h3>
                         <p class="staff-role">Mwalimu Mkuu</p>
                         <p class="staff-description">Anaongoza shule na kusimamia mazingira bora ya kujifunza, malezi na maendeleo ya watoto.</p>
@@ -452,7 +452,7 @@
                         </a>
                     </article>
                     <article class="staff-card">
-                        <div class="staff-photo"><img src="assets/brian-systems-specialist.jpg" alt="Picha ya Mr. BRIAN, mtaalamu wa mifumo na teknolojia" width="132" height="132" loading="lazy"></div>
+                        <div class="staff-photo"><img src="./assets/brian-systems-specialist.jpg" alt="Picha ya Mr. BRIAN, mtaalamu wa mifumo na teknolojia" width="132" height="132" loading="lazy" decoding="async"></div>
                         <h3>Mr. BRIAN</h3>
                         <p class="staff-role">Mtaalamu wa mifumo na miongozo ya Science &amp; Technology</p>
                         <p class="staff-description">Husaidia kuandaa na kusimamia mifumo na miongozo ya sayansi na teknolojia ili kuimarisha ujifunzaji wa watoto.</p>
