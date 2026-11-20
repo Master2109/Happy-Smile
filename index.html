@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="sw">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#174d3a">
+    <meta name="description" content="Happy Smile Day Care — mazingira salama, ya upendo na ya kucheza kwa watoto kujifunza, kukua na kung'ara.">
+    <title>Happy Smile Day Care</title>
+    <link rel="icon" type="image/png" href="assets/happy-smile-day-care-logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light;
+            --green: #17684b;
+            --green-dark: #124332;
+            --green-light: #e8f6ec;
+            --gold: #ffc84d;
+            --coral: #ff8c75;
+            --blue: #6c9ce8;
+            --pink: #f5a7bd;
+            --ink: #293c36;
+            --muted: #64766f;
+            --paper: #fffefa;
+            --white: #fff;
+            --line: #e9eee9;
+            --shadow: 0 18px 55px rgba(26, 65, 47, .10);
+            font-family: "DM Sans", "Segoe UI", sans-serif;
+            color: var(--ink);
+            background: var(--paper);
+            font-synthesis: none;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
+            scroll-padding-top: 92px;
+        }
+        *, *::before, *::after { box-sizing: border-box; }
+        body { margin: 0; line-height: 1.65; }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; }
+        button, input, select, textarea { font: inherit; }
+        input, select, textarea { min-width: 0; }
+        button, a { -webkit-tap-highlight-color: transparent; }
+        :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+        .skip-link {
+            position: fixed; top: 12px; left: 12px; z-index: 20; padding: 10px 16px;
+            border-radius: 8px; background: var(--white); color: var(--green);
+            transform: translateY(-160%); transition: transform .2s;
+        }
+        .skip-link:focus { transform: translateY(0); }
+        .container { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+        .topbar { background: var(--green-dark); color: #edf5ee; font-size: .82rem; }
+        .topbar-inner { min-height: 37px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .site-header {
+            position: sticky; top: 0; z-index: 10; background: rgba(255, 253, 248, .96);
+            border-bottom: 1px solid rgba(23, 77, 58, .08); backdrop-filter: blur(14px);
+        }
+        .site-header::after { content: ""; position: absolute; right: 0; bottom: -3px; left: 0; height: 3px; background: linear-gradient(90deg, var(--coral) 0 20%, var(--gold) 20% 40%, #8fc98d 40% 60%, var(--blue) 60% 80%, var(--pink) 80%); }
+        .nav-wrap { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+        .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; flex-shrink: 0; }
+        .brand-mark { width: 62px; height: 62px; display: block; flex: 0 0 62px; border-radius: 50%; object-fit: cover; }
+        .brand-copy { display: grid; line-height: 1.15; }
+        .brand-copy strong { font: 900 1.02rem/1.2 "Nunito", sans-serif; color: var(--green); letter-spacing: -.025em; }
+        .brand-copy span { margin-top: 3px; color: var(--muted); font-size: .69rem; letter-spacing: .08em; text-transform: uppercase; }
+        .main-nav { display: flex; align-items: center; gap: 25px; }
+        .main-nav a { color: #3c5147; text-decoration: none; font-size: .9rem; font-weight: 600; transition: color .2s; }
+        .main-nav a:hover, .main-nav a[aria-current="location"] { color: var(--green); }
+        .main-nav .nav-cta { padding: 11px 17px; border-radius: 999px; background: var(--green); color: var(--white); }
+        .main-nav .nav-cta:hover { background: var(--green-dark); color: var(--white); }
+        .menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 13px; background: var(--white); color: var(--green); cursor: pointer; }
+        .hero { position: relative; overflow: hidden; padding: 74px 0 76px; background: radial-gradient(ellipse at 7% 10%, rgba(255, 200, 77, .16), transparent 26%), radial-gradient(ellipse at 96% 83%, rgba(170, 152, 232, .13), transparent 26%), var(--paper); }
+        .hero::before { content: ""; position: absolute; width: 540px; height: 540px; top: -330px; right: -100px; border-radius: 50%; background: #fff1cc; }
+        .hero::after { content: "✦  ·  ✦"; position: absolute; bottom: 35px; left: 3%; color: #e7a336; font-size: 1.7rem; letter-spacing: .7rem; transform: rotate(-12deg); opacity: .75; }
+        .hero-grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr); align-items: center; gap: 56px; }
+        .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--green); font-weight: 700; font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; }
+        .eyebrow::before { content: ""; width: 22px; height: 3px; border-radius: 9px; background: var(--coral); }
+        h1, h2, h3, p { margin-top: 0; }
+        h1, h2, h3 { font-family: "Nunito", "Segoe UI", sans-serif; }
+        .hero h1 { max-width: 590px; margin: 18px 0; color: var(--green-dark); font-size: clamp(2.75rem, 5vw, 4.35rem); line-height: 1.08; letter-spacing: -.045em; }
+        .hero h1 span { color: #e49416; text-decoration: underline; text-decoration-color: #ffcf70; text-decoration-thickness: 7px; text-underline-offset: 4px; }
+        .hero-copy { max-width: 500px; margin-bottom: 27px; color: var(--muted); font-size: 1.07rem; }
+        .button-row { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .button { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 12px 20px; border: 0; border-radius: 999px; background: linear-gradient(135deg, #188052, var(--green)); color: var(--white); text-decoration: none; font-weight: 700; cursor: pointer; transition: transform .2s, background .2s, box-shadow .2s; }
+        .button:hover { transform: translateY(-2px); background: var(--green-dark); box-shadow: 0 8px 20px rgba(23, 77, 58, .18); }
+        .button.secondary { border: 1px solid #d9e3dc; background: transparent; color: var(--green); }
+        .button.secondary:hover { background: var(--green-light); box-shadow: none; }
+        .hero-note { display: flex; align-items: center; gap: 11px; margin-top: 26px; color: var(--muted); font-size: .86rem; }
+        .avatar-stack { display: flex; padding-left: 3px; }
+        .avatar-stack span { width: 30px; height: 30px; display: grid; place-items: center; margin-left: -3px; border: 2px solid var(--paper); border-radius: 50%; background: #f7d9a1; font-size: .85rem; }
+        .avatar-stack span:nth-child(2) { background: #d8e9ce; }
+        .avatar-stack span:nth-child(3) { background: #f5d2c9; }
+        .hero-art { position: relative; min-height: 420px; }
+        .hero-photo { position: absolute; inset: 4px 14px 8px 32px; overflow: hidden; border: 7px solid #fff; border-radius: 48% 48% 34px 34px; background: linear-gradient(155deg, rgba(23,77,58,.02), rgba(23,77,58,.08)), url("assets/hero-classroom.jpg") center 42%/cover, #dcebdc; box-shadow: 0 20px 55px rgba(23, 77, 58, .18); }
+        .photo-badge { position: absolute; display: flex; align-items: center; gap: 10px; padding: 13px 16px; border: 2px solid #fff; border-radius: 18px; background: var(--white); box-shadow: var(--shadow); }
+        .photo-badge strong { display: block; color: var(--green); font: 800 .9rem "Nunito", sans-serif; }
+        .photo-badge small { color: var(--muted); font-size: .76rem; }
+        .badge-icon { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 12px; background: #fff2d5; font-size: 1.2rem; }
+        .photo-badge.top { top: 35px; left: 0; border-color: #ffe6a2; }
+        .photo-badge.bottom { right: 0; bottom: 30px; border-color: #d8eddf; }
+        .sun-doodle { position: absolute; right: -1px; top: -5px; width: 73px; height: 73px; display: grid; place-items: center; border: 4px solid #fff; border-radius: 50%; background: var(--gold); color: var(--green); font-size: 2rem; transform: rotate(-12deg); box-shadow: 0 7px 18px rgba(230, 163, 54, .22); }
+        .trust-strip { border-block: 1px solid #f1e8d5; background: linear-gradient(90deg, #fff8e8, #f4fbf5 50%, #f4f5ff); }
+        .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); padding: 25px 0; }
+        .trust-item { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 5px 16px; border-right: 1px solid var(--line); }
+        .trust-item:last-child { border: 0; }
+        .trust-icon { font-size: 1.45rem; }
+        .trust-item strong { display: block; color: var(--green); font: 800 1rem "Nunito", sans-serif; }
+        .trust-item span:last-child { color: var(--muted); font-size: .78rem; }
+        .section { padding: 86px 0; }
+        .section.soft { background: linear-gradient(135deg, #f3faf2, #f6f5ff 55%, #fff7eb); }
+        .section-heading { max-width: 660px; margin: 0 auto 42px; text-align: center; }
+        .section-heading h2 { margin: 12px 0; color: var(--green-dark); font-size: clamp(2rem, 3.6vw, 2.9rem); line-height: 1.15; letter-spacing: -.035em; }
+        .section-heading p { margin-bottom: 0; color: var(--muted); }
+        .about-grid { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); align-items: center; gap: 64px; }
+        .about-visual { position: relative; min-height: 390px; overflow: hidden; border: 5px solid #fff; border-radius: 42px 24px 42px 24px; background: radial-gradient(circle at 20% 20%, #fff 0 3px, transparent 4px) 0 0/27px 27px, linear-gradient(145deg, #c9efd8, #fff0c8 54%, #f7dce6); box-shadow: var(--shadow); }
+        .about-visual::before { content: ""; position: absolute; inset: 18px; border: 2px dashed rgba(255,255,255,.85); border-radius: 28px 15px; }
+        .about-illustration { position: absolute; inset: 0; display: grid; place-items: center; font-size: clamp(8rem, 18vw, 13rem); filter: drop-shadow(0 12px 8px rgba(71, 95, 61, .12)); }
+        .about-sticker { position: absolute; right: 20px; bottom: 22px; max-width: 180px; padding: 14px 16px; border-radius: 15px; background: var(--white); color: var(--green); box-shadow: var(--shadow); font: 800 .88rem/1.35 "Nunito", sans-serif; transform: rotate(2deg); }
+        .about-copy h2 { margin: 12px 0 16px; color: var(--green-dark); font-size: clamp(2rem, 3vw, 2.7rem); line-height: 1.16; }
+        .about-copy > p { color: var(--muted); }
+        .check-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 18px; margin: 22px 0 27px; padding: 0; list-style: none; }
+        .check-list li { display: flex; gap: 9px; align-items: flex-start; color: #40584b; font-size: .9rem; }
+        .check-list li::before { content: "✓"; flex: 0 0 21px; width: 21px; height: 21px; display: grid; place-items: center; border-radius: 50%; background: #e3f0e6; color: var(--green); font-size: .77rem; font-weight: 800; }
+        .program-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+        .program-card { min-height: 220px; padding: 25px; border: 1px solid var(--line); border-bottom: 4px solid #9bcf9b; border-radius: 22px 22px 18px 18px; background: var(--white); transition: transform .2s, box-shadow .2s; }
+        .program-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+        .program-card:nth-child(3n + 2) { border-bottom-color: var(--coral); }
+        .program-card:nth-child(3n) { border-bottom-color: var(--blue); }
+        .program-icon { width: 58px; height: 58px; display: grid; place-items: center; margin-bottom: 16px; border-radius: 19px 14px 19px 14px; background: #fff2d5; font-size: 1.8rem; }
+        .program-card:nth-child(3n + 2) .program-icon { background: #fce8e9; }
+        .program-card:nth-child(3n) .program-icon { background: #e6e9ff; }
+        .program-card h3 { margin-bottom: 7px; color: var(--green); font-size: 1.15rem; }
+        .program-card p { margin-bottom: 0; color: var(--muted); font-size: .9rem; }
+        .playground { position: relative; overflow: hidden; background: radial-gradient(ellipse at 10% 80%, rgba(245, 167, 189, .22), transparent 30%), radial-gradient(ellipse at 95% 20%, rgba(108, 156, 232, .20), transparent 29%), #fff; }
+        .playground::before { content: "✦"; position: absolute; top: 32px; left: 7%; color: var(--gold); font-size: 3rem; transform: rotate(-14deg); }
+        .playground::after { content: "✿"; position: absolute; right: 8%; bottom: 26px; color: var(--pink); font-size: 2.8rem; transform: rotate(13deg); }
+        .discovery-card { position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 22px; max-width: 850px; margin: 0 auto; padding: 25px; border: 2px solid #f0e7ff; border-radius: 28px; background: linear-gradient(105deg, #fff2d6, #fff 44%, #eaf3ff); box-shadow: var(--shadow); }
+        .discovery-art { width: 92px; height: 92px; display: grid; place-items: center; border-radius: 28px 20px; background: #fff; font-size: 3.4rem; box-shadow: 0 8px 22px rgba(84, 71, 147, .12); }
+        .discovery-copy small { color: #8766cc; font-size: .76rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+        .discovery-copy h3 { margin: 5px 0; color: var(--green-dark); font-size: 1.35rem; }
+        .discovery-copy p { margin-bottom: 0; color: var(--muted); font-size: .9rem; }
+        .discovery-card .button { flex-shrink: 0; }
+        .day-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 50px; align-items: center; }
+        .day-intro h2 { margin: 13px 0; color: var(--green-dark); font-size: clamp(2rem, 3.4vw, 2.7rem); line-height: 1.15; }
+        .day-intro p { color: var(--muted); }
+        .day-list { display: grid; gap: 11px; }
+        .day-row { display: grid; grid-template-columns: 62px 1fr; align-items: center; gap: 15px; padding: 14px 17px; border: 1px solid var(--line); border-left: 4px solid #9bcf9b; border-radius: 15px; background: var(--white); }
+        .day-row:nth-child(2) { border-left-color: var(--gold); }
+        .day-row:nth-child(3) { border-left-color: var(--coral); }
+        .day-row:nth-child(4) { border-left-color: var(--blue); }
+        .day-time { color: #b77a1b; font: 800 .8rem "Nunito", sans-serif; }
+        .day-row strong { display: block; color: var(--green); font: 800 .98rem "Nunito", sans-serif; }
+        .day-row span:last-child { color: var(--muted); font-size: .82rem; }
+        .admissions-panel { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); overflow: hidden; border: 4px solid #fff; border-radius: 31px; background: var(--green); box-shadow: var(--shadow); }
+        .admissions-copy { padding: 42px; color: #eef7ef; background: radial-gradient(circle at 95% 6%, rgba(255,200,77,.24), transparent 22%), linear-gradient(145deg, #17684b, #32845d); }
+        .admissions-copy .eyebrow { color: #f8d37e; }
+        .admissions-copy h2 { margin: 16px 0; color: var(--white); font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.14; }
+        .admissions-copy p { color: #d3e4d8; }
+        .admissions-copy ul { margin: 24px 0 0; padding-left: 19px; color: #e5f0e7; }
+        .admissions-copy li { margin: 8px 0; }
+        .admissions-form { padding: 39px; background: var(--white); }
+        .admissions-form h3 { margin-bottom: 5px; color: var(--green); font-size: 1.4rem; }
+        .admissions-form > p { margin-bottom: 21px; color: var(--muted); font-size: .87rem; }
+        .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        .field { display: grid; gap: 6px; margin-bottom: 13px; }
+        .field label { color: #40584b; font-size: .82rem; font-weight: 700; }
+        .field input, .field select, .field textarea { width: 100%; min-height: 45px; padding: 10px 12px; border: 1px solid #dce5de; border-radius: 10px; background: #fff; color: var(--ink); }
+        .field textarea { min-height: 95px; resize: vertical; }
+        .field input::placeholder, .field textarea::placeholder { color: #99a69e; }
+        .form-note { margin: 12px 0 0; color: var(--muted); font-size: .75rem; }
+        .form-status { min-height: 24px; margin: 10px 0 0; color: var(--green); font-size: .88rem; font-weight: 700; }
+        .staff-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 900px; margin-inline: auto; }
+        .staff-card { position: relative; overflow: hidden; padding: 34px 30px 30px; border: 1px solid #e8eee8; border-top: 4px solid var(--gold); border-radius: 24px; background: linear-gradient(160deg, #fff 55%, #fffaf0); box-shadow: var(--shadow); text-align: center; transition: transform .2s, box-shadow .2s; }
+        .staff-card:hover { transform: translateY(-4px); box-shadow: 0 22px 50px rgba(26, 65, 47, .15); }
+        .staff-card:nth-child(2) { border-top-color: var(--blue); background: radial-gradient(ellipse at 50% 0, rgba(108, 156, 232, .12), transparent 46%), linear-gradient(160deg, #fff 45%, #f1f6ff); }
+        .staff-photo { width: 132px; height: 132px; overflow: hidden; margin: 0 auto 20px; border: 5px solid var(--white); border-radius: 50%; background: linear-gradient(145deg, #ffe7a7, #fff4d7); box-shadow: 0 0 0 2px #f4d378, 0 8px 22px rgba(84, 71, 40, .12); }
+        .staff-photo img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center 30%; }
+        .staff-card:nth-child(2) .staff-photo { background: linear-gradient(145deg, #dbe8ff, #f1f5ff); box-shadow: 0 0 0 3px #a9c5f5, 0 10px 26px rgba(55, 85, 140, .2); }
+        .staff-card h3 { margin-bottom: 6px; color: var(--green); font-size: 1.4rem; }
+        .staff-role { margin-bottom: 14px; color: var(--muted); font-size: .88rem; font-weight: 700; }
+        .staff-description { min-height: 3.2em; margin-bottom: 18px; color: #5a6c63; font-size: .91rem; line-height: 1.7; }
+        .staff-whatsapp { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 9px 16px; border: 1px solid #cfe7d2; border-radius: 999px; background: #eff9f0; color: var(--green); font-size: .88rem; font-weight: 700; text-decoration: none; transition: background .2s, color .2s; }
+        .staff-whatsapp:hover { background: var(--green); color: var(--white); }
+        .contact-grid { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 40px; }
+        .contact-copy h2 { margin: 12px 0; color: var(--green-dark); font-size: clamp(2rem, 3.2vw, 2.65rem); line-height: 1.15; }
+        .contact-copy > p { color: var(--muted); }
+        .contact-link { display: flex; align-items: center; gap: 13px; margin-top: 18px; padding: 14px; border: 1px solid #e5eddd; border-radius: 18px; background: linear-gradient(110deg, #fff, #f7fbf2); text-decoration: none; }
+        .contact-link:hover { border-color: #bdd1c2; }
+        .contact-link .badge-icon { flex: 0 0 42px; }
+        .contact-link strong { display: block; color: var(--green); font-size: .9rem; }
+        .contact-link span:last-child { color: var(--muted); font-size: .81rem; }
+        .location-map { height: 120px; margin-top: 10px; overflow: hidden; border: 1px solid #e5eddd; border-radius: 15px; background: #e8eee8; }
+        .location-map iframe { width: 100%; height: 100%; display: block; border: 0; }
+        .contact-form { padding: 27px; border: 1px solid var(--line); border-radius: 18px; background: var(--white); }
+        .contact-form h3 { margin-bottom: 5px; color: var(--green); font-size: 1.28rem; }
+        .contact-form > p { margin-bottom: 20px; color: var(--muted); font-size: .86rem; }
+        footer { padding: 30px 0; border-top: 5px solid transparent; border-image: linear-gradient(90deg, var(--coral), var(--gold), #8fc98d, var(--blue), var(--pink)) 1; background: var(--green-dark); color: #e2eee5; }
+        .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .footer-inner p { margin: 0; font-size: .82rem; }
+        .footer-inner a { color: #f8d37e; font-size: .82rem; text-decoration: none; }
+        .footer-inner a:hover { text-decoration: underline; }
+        .developer-credit { position: relative; width: max-content; max-width: calc(100% - 34px); display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 6px; margin: 8px auto 0; padding: 3px 8px; border: 1px solid rgba(255, 255, 255, .12); border-radius: 999px; background: rgba(255, 255, 255, .04); text-align: center; }
+        .developer-emblem { width: 44px; height: 28px; flex: 0 0 44px; }
+        .developer-emblem svg { display: block; width: 100%; height: 100%; overflow: visible; }
+        .developer-arc-title { fill: #f8d37e; font-family: "Nunito", sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 1.4px; }
+        .developer-name { margin: 0; color: #f8d37e; font: 900 .8rem/1 "Nunito", sans-serif; }
+        .developer-nickname { color: #e2eee5; font-size: .5rem; font-weight: 700; letter-spacing: .2px; }
+        .swirl-divider { position: absolute; right: 8px; bottom: 2px; left: 58px; height: 8px; pointer-events: none; }
+        .swirl-divider svg { display: block; width: 100%; height: 100%; }
+        .reveal { animation: rise-in .65s both; }
+        @keyframes rise-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 900px) {
+            .menu-toggle { display: grid; place-items: center; font-size: 1.25rem; }
+            .main-nav { position: absolute; top: calc(100% + 1px); inset-inline: 0; display: none; align-items: stretch; gap: 0; max-height: calc(100vh - 80px); overflow-y: auto; padding: 8px 20px 17px; border-bottom: 1px solid var(--line); background: var(--paper); box-shadow: 0 16px 20px rgba(26,65,47,.08); }
+            .main-nav.open { display: grid; }
+            .main-nav a { padding: 11px 8px; font-size: .95rem; }
+            .main-nav .nav-cta { margin-top: 6px; text-align: center; }
+            .hero-grid { gap: 28px; }
+            .hero-art { min-height: 365px; }
+            .about-grid { gap: 36px; }
+            .program-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .admissions-copy, .admissions-form { padding: 30px; }
+        }
+        @media (max-width: 760px) {
+            :root { scroll-padding-top: 72px; }
+            .container { width: min(100% - 34px, 600px); }
+            .topbar-inner { justify-content: center; min-height: 34px; }
+            .topbar-inner span { display: none; }
+            .nav-wrap { min-height: 68px; }
+            .hero { padding: 50px 0 35px; }
+            .hero-grid, .about-grid, .day-grid, .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+            .hero h1 { max-width: 520px; font-size: clamp(2.35rem, 9vw, 4rem); }
+            .hero-art { min-height: clamp(260px, 68vw, 360px); }
+            .hero-photo { inset: 5px 14px 6px 22px; }
+            .photo-badge.top { top: 20px; }
+            .photo-badge.bottom { bottom: 14px; }
+            .sun-doodle { width: 58px; height: 58px; font-size: 1.6rem; }
+            .trust-grid { padding: 14px 0; }
+            .trust-item { flex-direction: column; gap: 4px; padding: 6px 7px; text-align: center; }
+            .trust-item span:last-child { font-size: .68rem; }
+            .trust-item strong { font-size: .85rem; }
+            .trust-icon { font-size: 1.2rem; }
+            .section { padding: 64px 0; }
+            .section-heading { margin-bottom: 29px; }
+            .about-visual { min-height: 280px; }
+            .program-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+            .program-card { min-height: unset; padding: 21px; }
+            .program-icon { margin-bottom: 11px; }
+            .discovery-card { grid-template-columns: auto minmax(0, 1fr); gap: 15px; padding: 20px; }
+            .discovery-art { width: 68px; height: 68px; border-radius: 22px 16px; font-size: 2.6rem; }
+            .discovery-card .button { grid-column: 1 / -1; }
+            .admissions-panel { grid-template-columns: 1fr; }
+            .admissions-copy, .admissions-form { padding: 25px; }
+            .footer-inner { flex-direction: column; align-items: flex-start; }
+        }
+        @media (max-width: 560px) {
+            .form-grid { grid-template-columns: 1fr; gap: 0; }
+            .check-list { grid-template-columns: 1fr; }
+            .hero-art { min-height: clamp(230px, 72vw, 300px); }
+            .photo-badge { padding: 9px 11px; }
+            .badge-icon { width: 33px; height: 33px; }
+            .trust-grid { grid-template-columns: 1fr; gap: 4px; }
+            .trust-item { flex-direction: row; justify-content: flex-start; gap: 12px; padding: 8px 12px; border-right: 0; border-bottom: 1px solid var(--line); text-align: left; }
+            .trust-item:last-child { border-bottom: 0; }
+            .trust-icon { font-size: 1.35rem; }
+            .trust-item strong { font-size: .95rem; }
+            .trust-item span:last-child { font-size: .76rem; }
+            .program-grid { grid-template-columns: 1fr; }
+            .staff-grid { grid-template-columns: 1fr; }
+            .discovery-card { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+            .discovery-card .button { grid-column: auto; width: 100%; }
+            .admissions-copy, .admissions-form { padding: 22px; }
+            .contact-form, .staff-card { padding: 21px; }
+            .button-row .button { flex: 1 1 100%; }
+            .day-row { grid-template-columns: 1fr; gap: 4px; }
+            .day-row span:last-child { min-width: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-link" href="#main">Ruka hadi maudhui</a>
+    <div class="topbar">
+        <div class="container topbar-inner">
+            <span>We warmly welcome you to our beloved school for the sake of the children</span>
+        </div>
+    </div>
+    <header class="site-header">
+        <div class="container nav-wrap">
+            <a class="brand" href="#home" aria-label="Happy Smile Day Care — Mwanzo">
+                <img class="brand-mark" src="assets/happy-smile-day-care-logo.png" alt="Nembo ya Happy Smile Day Care" width="62" height="62">
+                <span class="brand-copy"><strong>Happy Smile</strong><span>Day Care</span></span>
+            </a>
+            <button class="menu-toggle" type="button" aria-label="Fungua menyu" aria-expanded="false" aria-controls="main-nav">☰</button>
+            <nav class="main-nav" id="main-nav" aria-label="Menyu kuu">
+                <a href="#home">Mwanzo</a>
+                <a href="#about">Kuhusu sisi</a>
+                <a href="#programs">Masomo</a>
+                <a href="#admissions">Udahili</a>
+                <a href="#staff">Our Staff</a>
+                <a href="#contact" class="nav-cta">Wasiliana nasi</a>
+            </nav>
+        </div>
+    </header>
+    <main id="main">
+        <section class="hero" id="home">
+            <div class="container hero-grid">
+                <div class="reveal">
+                    <span class="eyebrow">Karibu Happy Smile Day Care</span>
+                    <h1>Kila mtoto ana nafasi ya <span>kung'ara.</span></h1>
+                    <p class="hero-copy">Mwanzo mzuri wa safari ya kujifunza huanza katika mazingira salama, yenye upendo na yaliyojaa nafasi ya kucheza na kugundua.</p>
+                    <div class="button-row">
+                        <a class="button" href="#admissions">Anza udahili <span aria-hidden="true">→</span></a>
+                        <a class="button secondary" href="#about">Tufahamu zaidi</a>
+                    </div>
+                    <div class="hero-note">
+                        <span class="avatar-stack" aria-hidden="true"><span>🌼</span><span>🧸</span><span>🌈</span></span>
+                        <span>Malezi ya upendo. Kujifunza kwa furaha.</span>
+                    </div>
+                </div>
+                <div class="hero-art" role="img" aria-label="Mtoto akijifunza maumbo darasani">
+                    <div class="hero-photo"></div>
+                    <span class="sun-doodle" aria-hidden="true">✳</span>
+                    <div class="photo-badge top"><span class="badge-icon" aria-hidden="true">🧩</span><span><strong>Kujifunza kwa vitendo</strong><small>Ugunduzi kila siku</small></span></div>
+                    <div class="photo-badge bottom"><span class="badge-icon" aria-hidden="true">💚</span><span><strong>Mtoto kwanza</strong><small>Kukua kwa kujiamini</small></span></div>
+                </div>
+            </div>
+        </section>
+        <section class="trust-strip" aria-label="Tunachothamini">
+            <div class="container trust-grid">
+                <div class="trust-item"><span class="trust-icon" aria-hidden="true">🛡️</span><span><strong>Mazingira salama</strong><span>Utulivu na uangalizi</span></span></div>
+                <div class="trust-item"><span class="trust-icon" aria-hidden="true">🌱</span><span><strong>Kukua kwa hatua</strong><span>Kujifunza kulingana na umri</span></span></div>
+                <div class="trust-item"><span class="trust-icon" aria-hidden="true">🤝</span><span><strong>Ushirikiano</strong><span>Familia ni sehemu ya safari</span></span></div>
+            </div>
+        </section>
+        <section class="section" id="about">
+            <div class="container about-grid">
+                <div class="about-visual" role="img" aria-label="Mchoro wa kitabu, kalamu na ua unaoashiria ukuaji na kujifunza">
+                    <div class="about-illustration" aria-hidden="true">📚🌼</div>
+                    <div class="about-sticker">Kila siku ni nafasi mpya ya kugundua!</div>
+                </div>
+                <div class="about-copy">
+                    <span class="eyebrow">Kuhusu Happy Smile Day Care</span>
+                    <h2>Msingi imara kwa safari ya maisha yote.</h2>
+                    <p>Happy Smile Day Care ni shule ya awali inayokuza udadisi, ubunifu na kujiamini. Tunachanganya kujifunza darasani na michezo na shughuli za vitendo, huku tukithamini utu na kasi ya ukuaji wa kila mtoto.</p>
+                    <ul class="check-list">
+                        <li>Mazingira ya kujifunza yenye upendo</li>
+                        <li>Kukuza lugha na mawasiliano</li>
+                        <li>Michezo na ubunifu kila siku</li>
+                        <li>Kushirikiana kwa karibu na wazazi</li>
+                    </ul>
+                    <a class="button secondary" href="#contact">Tuulize kuhusu shule <span aria-hidden="true">→</span></a>
+                </div>
+            </div>
+        </section>
+        <section class="section soft" id="programs">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="eyebrow">Masomo na ukuaji</span>
+                    <h2>Kujifunza kunakogusa kila sehemu ya maisha.</h2>
+                    <p>Shughuli mbalimbali husaidia watoto kujenga ujuzi wa msingi kupitia mazoezi, ubunifu na kushirikiana.</p>
+                </div>
+                <div class="program-grid">
+                    <article class="program-card"><span class="program-icon" aria-hidden="true">🔢</span><h3>Mathematics</h3><p>Hesabu, maumbo na kutatua changamoto kwa njia ya kucheza.</p></article>
+                    <article class="program-card"><span class="program-icon" aria-hidden="true">📖</span><h3>English</h3><p>Kusoma, kuandika na kujifunza maneno na sentensi kwa Kiingereza.</p></article>
+                    <article class="program-card"><span class="program-icon" aria-hidden="true">🗣️</span><h3>Kiswahili</h3><p>Kujenga ufasaha wa kusoma, kuandika na kuzungumza Kiswahili.</p></article>
+                    <article class="program-card"><span class="program-icon" aria-hidden="true">🤝</span><h3>Relation</h3><p>Kujifunza ushirikiano, kuheshimu na kujenga mahusiano mazuri.</p></article>
+                    <article class="program-card"><span class="program-icon" aria-hidden="true">💬</span><h3>Communication</h3><p>Kusikiliza, kueleza mawazo na kuwasiliana kwa ujasiri.</p></article>
+                    <article class="program-card"><span class="program-icon" aria-hidden="true">🎨</span><h3>Art</h3><p>Kuchora, kuumba na kutumia ubunifu kuonyesha mawazo.</p></article>
+                    <article class="program-card"><span class="program-icon" aria-hidden="true">🌿</span><h3>Health Care</h3><p>Usafi, lishe, afya na tabia za kujitunza kila siku.</p></article>
+                </div>
+            </div>
+        </section>
+        <section class="section playground" id="play">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="eyebrow">Cheza na ugundue</span>
+                    <h2>Kila wazo dogo linaweza kuwa ugunduzi mkubwa!</h2>
+                    <p>Jifunze pamoja nyumbani kwa michezo rahisi inayochochea ubunifu, lugha na furaha.</p>
+                </div>
+                <div class="discovery-card">
+                    <span class="discovery-art" id="discovery-icon" aria-hidden="true">🎨</span>
+                    <div class="discovery-copy" aria-live="polite" aria-atomic="true">
+                        <small>Wazo la kucheza</small>
+                        <h3 id="discovery-title">Rangi za furaha</h3>
+                        <p id="discovery-description">Chagua rangi tatu unazoziona karibu nawe, kisha zitumie kuchora picha ya kitu unachokipenda.</p>
+                    </div>
+                    <button class="button" id="discovery-button" type="button">Wazo jingine <span aria-hidden="true">↻</span></button>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="day">
+            <div class="container day-grid">
+                <div class="day-intro">
+                    <span class="eyebrow">Siku yenye maana</span>
+                    <h2>Ratiba inayosawazisha kujifunza na kucheza.</h2>
+                    <p>Kila siku huwapa watoto nafasi ya kujifunza, kusonga, kupumzika na kushirikiana. Ratiba halisi hutegemea darasa na itathibitishwa na shule.</p>
+                    <a class="button secondary" href="#contact">Uliza kuhusu ratiba <span aria-hidden="true">→</span></a>
+                </div>
+                <div class="day-list" aria-label="Mfano wa shughuli za siku">
+                    <div class="day-row"><span class="day-time">Asubuhi</span><span><strong>Karibu na mazungumzo</strong><span>Kuanza siku pamoja na kujiandaa kujifunza</span></span></div>
+                    <div class="day-row"><span class="day-time">Darasani</span><span><strong>Masomo ya vitendo</strong><span>Lugha, hesabu, hadithi na ugunduzi</span></span></div>
+                    <div class="day-row"><span class="day-time">Mchana</span><span><strong>Michezo na ubunifu</strong><span>Kusonga, kuunda na kushirikiana</span></span></div>
+                    <div class="day-row"><span class="day-time">Mwisho</span><span><strong>Tafakari na kuagana</strong><span>Kusherehekea tulichojifunza siku hiyo</span></span></div>
+                </div>
+            </div>
+        </section>
+        <section class="section soft" id="admissions">
+            <div class="container">
+                <div class="admissions-panel">
+                    <div class="admissions-copy">
+                        <span class="eyebrow">Jiunge nasi</span>
+                        <h2>Hatua ya kwanza ya safari mpya.</h2>
+                        <p>Jaza taarifa za msingi. WhatsApp itafunguliwa na ujumbe kamili wa maombi yako tayari kutumwa kwa shule.</p>
+                        <ul><li>Jaza taarifa zote za mtoto na mzazi/mlezi</li><li>Thibitisha ujumbe ulioandaliwa kwenye WhatsApp</li><li>Bonyeza Tuma ili shule ipokee maombi yako</li></ul>
+                    </div>
+                    <form class="admissions-form" id="admission-form">
+                        <h3>Fomu ya maombi ya udahili</h3>
+                        <p>Sehemu zote zenye alama * zinahitajika.</p>
+                        <div class="form-grid">
+                            <div class="field"><label for="child-name">Jina la mtoto *</label><input id="child-name" name="child_name" autocomplete="name" required maxlength="100" placeholder="Jina kamili"></div>
+                            <div class="field"><label for="child-dob">Tarehe ya kuzaliwa *</label><input id="child-dob" name="dob" type="date" required></div>
+                            <div class="field"><label for="child-gender">Jinsia *</label><select id="child-gender" name="gender" required><option value="">Chagua</option><option value="Male">Mvulana</option><option value="Female">Msichana</option></select></div>
+                            <div class="field"><label for="parent-name">Jina la mzazi/mlezi *</label><input id="parent-name" name="parent_name" autocomplete="name" required maxlength="100" placeholder="Jina kamili"></div>
+                            <div class="field"><label for="parent-phone">Namba ya simu *</label><input id="parent-phone" name="parent_phone" type="tel" autocomplete="tel" required maxlength="30" placeholder="+255 ..."></div>
+                            <div class="field"><label for="home-address">Eneo unaloishi *</label><input id="home-address" name="address" autocomplete="street-address" required maxlength="255" placeholder="Mtaa au eneo"></div>
+                        </div>
+                        <button class="button" type="submit">Tuma maombi WhatsApp <span aria-hidden="true">→</span></button>
+                        <p class="form-note">Taarifa zako zitatumika kwa ajili ya mawasiliano kuhusu maombi haya pekee.</p>
+                        <p class="form-status" id="admission-status" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="section soft" id="staff">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="eyebrow">Meet the team</span>
+                    <h2>Our Staff</h2>
+                    <p>Watu wetu wanaojitolea kwa malezi, elimu na ukuaji wa kila mtoto.</p>
+                </div>
+                <div class="staff-grid">
+                    <article class="staff-card">
+                        <div class="staff-photo"><img src="assets/regina-mrosso.jpg" alt="Picha ya Regina Mrosso, Mwalimu Mkuu" width="132" height="132" loading="lazy"></div>
+                        <h3>Regina Mrosso</h3>
+                        <p class="staff-role">Mwalimu Mkuu</p>
+                        <p class="staff-description">Anaongoza shule na kusimamia mazingira bora ya kujifunza, malezi na maendeleo ya watoto.</p>
+                        <a class="staff-whatsapp" href="https://wa.me/255692420817" target="_blank" rel="noopener noreferrer" aria-label="Wasiliana na Regina Mrosso kupitia WhatsApp kwa namba 0692420817">
+                            <span aria-hidden="true">💬</span> WhatsApp: 0692420817
+                        </a>
+                    </article>
+                    <article class="staff-card">
+                        <div class="staff-photo"><img src="assets/brian-systems-specialist.jpg" alt="Picha ya Mr. BRIAN, mtaalamu wa mifumo na teknolojia" width="132" height="132" loading="lazy"></div>
+                        <h3>Mr. BRIAN</h3>
+                        <p class="staff-role">Mtaalamu wa mifumo na miongozo ya Science &amp; Technology</p>
+                        <p class="staff-description">Husaidia kuandaa na kusimamia mifumo na miongozo ya sayansi na teknolojia ili kuimarisha ujifunzaji wa watoto.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section class="section soft" id="contact">
+            <div class="container contact-grid">
+                <div class="contact-copy">
+                    <span class="eyebrow">Tuko hapa kukusaidia</span>
+                    <h2>Tuanzishe mazungumzo.</h2>
+                    <p>Una swali kuhusu mazingira yetu, masomo au nafasi za udahili? Tutumie ujumbe au wasiliana nasi kwa barua pepe.</p>
+                    <a class="contact-link" href="mailto:info@happysmiledaycare.ac.tz"><span class="badge-icon" aria-hidden="true">✉️</span><span><strong>Barua pepe</strong><span>info@happysmiledaycare.ac.tz</span></span></a>
+                    <a class="contact-link" href="https://maps.app.goo.gl/Ld5qxp65DsAZoAfc8" target="_blank" rel="noopener noreferrer" aria-label="Angalia eneo la shule Baruti kwa mama mzungu kwenye Google Maps">
+                        <span class="badge-icon" aria-hidden="true">📍</span>
+                        <span><strong>Mahali — fungua ramani</strong><span>Baruti kwa mama mzungu, Dar es Salaam</span></span>
+                    </a>
+                    <div class="location-map">
+                        <iframe src="https://www.google.com/maps?q=-6.8037717,39.1662109&amp;z=15&amp;output=embed" title="Ramani ndogo ya Baruti kwa mama mzungu, Dar es Salaam" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <form class="contact-form" id="contact-form">
+                    <h3>Tuma ujumbe</h3>
+                    <p>Ujumbe wako utafunguliwa kwenye WhatsApp ukiwa tayari kutumwa.</p>
+                    <div class="field"><label for="contact-name">Jina lako</label><input id="contact-name" name="name" autocomplete="name" required maxlength="100" placeholder="Jina kamili"></div>
+                    <div class="field"><label for="contact-email">Barua pepe yako</label><input id="contact-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="jina@example.com"></div>
+                    <div class="field"><label for="contact-message">Ujumbe wako</label><textarea id="contact-message" name="message" required maxlength="2000" placeholder="Tunaweza kukusaidiaje?"></textarea></div>
+                    <button class="button" type="submit">Tuma sasa <span aria-hidden="true">→</span></button>
+                    <p class="form-status" id="contact-status" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container footer-inner">
+            <p>© <span id="year"></span> Happy Smile Day Care. Haki zote zimehifadhiwa.</p>
+            <a href="#home">Rudi juu ↑</a>
+        </div>
+        <div class="developer-credit" aria-label="Nembo ya msanidi, Mr. Honorable">
+            <div class="developer-emblem">
+                <svg viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="In Honor Of, above a crown">
+                    <defs><path id="developer-honor-arc" d="M 17 76 A 63 63 0 0 1 143 76" /></defs>
+                    <text class="developer-arc-title"><textPath href="#developer-honor-arc" text-anchor="middle" startOffset="50%">IN HONOR OF</textPath></text>
+                    <svg x="52" y="48" width="56" height="36" viewBox="0 0 100 65" aria-hidden="true">
+                        <path d="M12 48 L18 24 L32 38 L50 14 L68 38 L82 24 L88 48 C88 52 84 55 78 55 H22 C16 55 12 52 12 48 Z" fill="#d4aa52" stroke="#4a3b2c" stroke-width="3" stroke-linejoin="round"/>
+                        <path d="M22 55 H78 C84 55 88 58 88 60 C88 62 84 65 78 65 H22 C16 65 12 62 12 60 C12 58 16 55 22 55 Z" fill="#b88b3a" stroke="#4a3b2c" stroke-width="3" stroke-linejoin="round"/>
+                        <circle cx="18" cy="22" r="4" fill="#2b4c7e" stroke="#4a3b2c" stroke-width="2"/>
+                        <circle cx="50" cy="12" r="4.5" fill="#2b4c7e" stroke="#4a3b2c" stroke-width="2"/>
+                        <circle cx="82" cy="22" r="4" fill="#2b4c7e" stroke="#4a3b2c" stroke-width="2"/>
+                        <circle cx="31" cy="42" r="3" fill="#2b4c7e" stroke="#4a3b2c" stroke-width="1.5"/>
+                        <circle cx="69" cy="42" r="3" fill="#c0392b" stroke="#4a3b2c" stroke-width="1.5"/>
+                        <path d="M50 32 L52 38 L58 38 L53 42 L55 48 L50 44 L45 48 L47 42 L42 38 L48 38 Z" fill="#f39c12" stroke="#4a3b2c" stroke-width="1"/>
+                    </svg>
+                </svg>
+            </div>
+            <p class="developer-name">BM</p>
+            <span class="developer-nickname">(MR. HONORABLE)</span>
+            <div class="swirl-divider" aria-hidden="true">
+                <svg viewBox="0 0 120 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 10 C 25 2, 35 18, 50 10 C 55 7, 58 3, 60 10 C 62 17, 65 13, 70 10 C 85 2, 95 18, 110 10" fill="none" stroke="#d4aa52" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const menuButton = document.querySelector('.menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+
+        menuButton.addEventListener('click', () => {
+            const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+            menuButton.setAttribute('aria-expanded', String(!isOpen));
+            menuButton.setAttribute('aria-label', isOpen ? 'Fungua menyu' : 'Funga menyu');
+            mainNav.classList.toggle('open', !isOpen);
+        });
+
+        mainNav.addEventListener('click', (event) => {
+            if (event.target instanceof HTMLAnchorElement) {
+                mainNav.classList.remove('open');
+                menuButton.setAttribute('aria-expanded', 'false');
+                menuButton.setAttribute('aria-label', 'Fungua menyu');
+            }
+        });
+
+        const sections = document.querySelectorAll('main section[id]');
+        const navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+        if ('IntersectionObserver' in window) {
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    navLinks.forEach((link) => {
+                        if (link.getAttribute('href') === `#${entry.target.id}`) {
+                            link.setAttribute('aria-current', 'location');
+                        } else {
+                            link.removeAttribute('aria-current');
+                        }
+                    });
+                });
+            }, { rootMargin: '-25% 0px -65% 0px' });
+            sections.forEach((section) => sectionObserver.observe(section));
+        }
+
+        document.getElementById('year').textContent = String(new Date().getFullYear());
+
+        const discoveryIdeas = [
+            {
+                icon: '🎨',
+                title: 'Rangi za furaha',
+                description: 'Chagua rangi tatu unazoziona karibu nawe, kisha zitumie kuchora picha ya kitu unachokipenda.'
+            },
+            {
+                icon: '🔎',
+                title: 'Msako wa maumbo',
+                description: 'Tafuta kitu chenye umbo la duara, mraba na pembetatu. Taja kila umbo kwa sauti.'
+            },
+            {
+                icon: '📖',
+                title: 'Hadithi ya picha',
+                description: 'Chagua picha unayoipenda na msimulie rafiki au mzazi hadithi fupi kuhusu kinachoendelea.'
+            },
+            {
+                icon: '🕺',
+                title: 'Ngoma ya wanyama',
+                description: 'Tembea kama tembo, ruka kama chura, kisha nyoosha mabawa yako kama ndege!'
+            }
+        ];
+        let discoveryIndex = 0;
+        document.getElementById('discovery-button').addEventListener('click', () => {
+            discoveryIndex = (discoveryIndex + 1) % discoveryIdeas.length;
+            const idea = discoveryIdeas[discoveryIndex];
+            document.getElementById('discovery-icon').textContent = idea.icon;
+            document.getElementById('discovery-title').textContent = idea.title;
+            document.getElementById('discovery-description').textContent = idea.description;
+        });
+
+        document.getElementById('admission-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const form = event.currentTarget;
+            const data = new FormData(form);
+            const gender = form.querySelector('[name="gender"]').selectedOptions[0].textContent;
+            const message = [
+                `Hongera sana ${data.get('parent_name')}, umefanikiwa kutuma taarifa za maombi ya udahili kikamilifu.`,
+                'Maombi ya udahili — Happy Smile Day Care',
+                '',
+                `Jina la mtoto: ${data.get('child_name')}`,
+                `Tarehe ya kuzaliwa: ${data.get('dob')}`,
+                `Jinsia: ${gender}`,
+                '',
+                `Jina la mzazi/mlezi: ${data.get('parent_name')}`,
+                `Namba ya simu: ${data.get('parent_phone')}`,
+                `Eneo anapoishi: ${data.get('address')}`
+            ].join('\n');
+            const whatsappUrl = `https://wa.me/255744412726?text=${encodeURIComponent(message)}`;
+            document.getElementById('admission-status').textContent =
+                `Hongera sana ${data.get('parent_name')}, umefanikiwa kutuma taarifa za maombi ya udahili kikamilifu.`;
+            window.location.href = whatsappUrl;
+        });
+
+        document.getElementById('contact-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const form = event.currentTarget;
+            const data = new FormData(form);
+            const message = [
+                'Ujumbe — Happy Smile Day Care',
+                '',
+                `Jina: ${data.get('name')}`,
+                `Barua pepe: ${data.get('email')}`,
+                '',
+                String(data.get('message'))
+            ].join('\n');
+            const whatsappUrl = `https://wa.me/255744412726?text=${encodeURIComponent(message)}`;
+            document.getElementById('contact-status').textContent =
+                `Asante sana ${data.get('name')}, tumepokea ujumbe wako na tunaufanyia kazi.`;
+            window.location.href = whatsappUrl;
+        });
+    </script>
+</body>
+</html>
