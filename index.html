@@ -594,9 +594,9 @@
             const data = new FormData(form);
             const gender = form.querySelector('[name="gender"]').selectedOptions[0].textContent;
             const message = [
-                `Hongera sana ${data.get('parent_name')}, umefanikiwa kutuma taarifa za maombi ya udahili kikamilifu.`,
-                'Maombi ya udahili — Happy Smile Day Care',
+                `Ndugu. ${data.get('parent_name')} anaomba nafasi ya udahili katika shule yako Happy Smile Day Care.`,
                 '',
+                'Taarifa za maombi:',
                 `Jina la mtoto: ${data.get('child_name')}`,
                 `Tarehe ya kuzaliwa: ${data.get('dob')}`,
                 `Jinsia: ${gender}`,
@@ -616,8 +616,7 @@
             const form = event.currentTarget;
             const data = new FormData(form);
             const message = [
-                'Ujumbe — Happy Smile Day Care',
-                '',
+                'Happy Smile Day Care tuna maombi yafuatayo:',
                 `Jina: ${data.get('name')}`,
                 `Barua pepe: ${data.get('email')}`,
                 '',
