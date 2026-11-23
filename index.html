@@ -52,6 +52,7 @@
         .container { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
         .topbar { background: var(--green-dark); color: #edf5ee; font-size: .82rem; }
         .topbar-inner { min-height: 37px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .topbar-inner > span { display: block; text-align: left; }
         .site-header {
             position: sticky; top: 0; z-index: 10; background: rgba(255, 253, 248, .96);
             border-bottom: 1px solid rgba(23, 77, 58, .08); backdrop-filter: blur(14px);
@@ -131,6 +132,59 @@
         .program-card:nth-child(3n) .program-icon { background: #e6e9ff; }
         .program-card h3 { margin-bottom: 7px; color: var(--green); font-size: 1.15rem; }
         .program-card p { margin-bottom: 0; color: var(--muted); font-size: .9rem; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+        .gallery-card {
+            display: flex; flex-direction: column;
+            overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: var(--white);
+            box-shadow: 0 10px 30px rgba(26,65,47,.07); transition: transform .2s, box-shadow .2s;
+        }
+        .gallery-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+        .gallery-card-image { width: 100%; height: 190px; object-fit: cover; }
+        .gallery-card-body { display: flex; flex: 1; flex-direction: column; align-items: flex-start; padding: 20px; }
+        .gallery-card h3 { margin: 0 0 8px; color: var(--green); font-size: 1.08rem; }
+        .gallery-card p { min-height: 72px; margin-bottom: 15px; color: var(--muted); font-size: .86rem; }
+        .see-more {
+            min-height: 44px; display: inline-flex; align-items: center; gap: 10px; margin-top: auto;
+            padding: 8px 9px 8px 16px; border: 1px solid #bdd9c5; border-radius: 999px;
+            background: linear-gradient(135deg, #eff8f1, #fff); color: var(--green);
+            font-size: .84rem; font-weight: 800; cursor: pointer;
+            box-shadow: 0 7px 18px rgba(23,104,75,.10);
+            transition: transform .2s, color .2s, background .2s, border-color .2s, box-shadow .2s;
+        }
+        .see-more span {
+            width: 28px; height: 28px; display: grid; place-items: center;
+            border-radius: 50%; background: var(--green); color: var(--white);
+            line-height: 1; transition: transform .2s, background .2s;
+        }
+        .see-more:hover {
+            transform: translateY(-2px); border-color: var(--green);
+            background: var(--green); color: var(--white);
+            box-shadow: 0 10px 22px rgba(23,104,75,.22);
+        }
+        .see-more:hover span { background: var(--white); color: var(--green); transform: translateX(2px); }
+        .see-more:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+        .gallery-detail {
+            position: fixed; inset: 0; z-index: 100; display: none; overflow-y: auto;
+            background: rgba(18,67,50,.30); backdrop-filter: blur(10px);
+        }
+        .gallery-detail.open { display: block; }
+        .gallery-detail-page {
+            width: min(1120px, calc(100% - 32px)); min-height: calc(100vh - 32px); margin: 16px auto;
+            padding: 32px; border: 1px solid rgba(255,255,255,.72); border-radius: 28px;
+            background: rgba(255,254,250,.96); box-shadow: 0 28px 80px rgba(18,67,50,.25);
+        }
+        .gallery-detail-header { position: relative; padding: 8px 55px 24px 0; }
+        .gallery-detail-header h2 { margin: 7px 0 10px; color: var(--green-dark); font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; }
+        .gallery-detail-header p { max-width: 760px; color: var(--muted); }
+        .gallery-detail-back {
+            position: absolute; top: 0; left: 0; width: 44px; height: 44px; display: grid; place-items: center;
+            border: 1px solid var(--line); border-radius: 50%; background: var(--white); color: var(--green);
+            font-size: 1.25rem; cursor: pointer;
+        }
+        .gallery-detail-header { padding: 8px 0 24px 55px; }
+        .gallery-detail-media { columns: 3 250px; column-gap: 14px; }
+        .gallery-detail-media figure { break-inside: avoid; margin: 0 0 14px; overflow: hidden; border-radius: 16px; background: #edf3ed; }
+        .gallery-detail-media img, .gallery-detail-media video { width: 100%; display: block; }
         .playground { position: relative; overflow: hidden; background: radial-gradient(ellipse at 10% 80%, rgba(245, 167, 189, .22), transparent 30%), radial-gradient(ellipse at 95% 20%, rgba(108, 156, 232, .20), transparent 29%), #fff; }
         .playground::before { content: "✦"; position: absolute; top: 32px; left: 7%; color: var(--gold); font-size: 3rem; transform: rotate(-14deg); }
         .playground::after { content: "✿"; position: absolute; right: 8%; bottom: 26px; color: var(--pink); font-size: 2.8rem; transform: rotate(13deg); }
@@ -209,6 +263,10 @@
         .swirl-divider svg { display: block; width: 100%; height: 100%; }
         .reveal { animation: rise-in .65s both; }
         @keyframes rise-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes see-more-glow {
+            0%, 100% { box-shadow: 0 8px 18px rgba(23,104,75,.12), 0 0 0 0 rgba(23,104,75,.16); }
+            50% { box-shadow: 0 10px 22px rgba(23,104,75,.18), 0 0 0 6px rgba(23,104,75,.06); }
+        }
         @media (max-width: 900px) {
             .menu-toggle { display: grid; place-items: center; font-size: 1.25rem; }
             .main-nav { position: absolute; top: calc(100% + 1px); inset-inline: 0; display: none; align-items: stretch; gap: 0; max-height: calc(100vh - 80px); overflow-y: auto; padding: 8px 20px 17px; border-bottom: 1px solid var(--line); background: var(--paper); box-shadow: 0 16px 20px rgba(26,65,47,.08); }
@@ -219,13 +277,21 @@
             .hero-art { min-height: 365px; }
             .about-grid { gap: 36px; }
             .program-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .admissions-copy, .admissions-form { padding: 30px; }
         }
         @media (max-width: 760px) {
             :root { scroll-padding-top: 72px; }
             .container { width: min(100% - 34px, 600px); }
-            .topbar-inner { justify-content: center; min-height: 34px; }
-            .topbar-inner span { display: none; }
+            .topbar-inner { justify-content: center; min-height: 34px; padding: 7px 0; text-align: center; }
+            .topbar-inner { overflow: hidden; }
+            .topbar-inner > span {
+                max-width: 100%;
+                font-size: .42rem;
+                line-height: 1.2;
+                letter-spacing: -.015em;
+                white-space: nowrap;
+            }
             .nav-wrap { min-height: 68px; }
             .hero { padding: 50px 0 35px; }
             .hero-grid, .about-grid, .day-grid, .contact-grid { grid-template-columns: 1fr; gap: 30px; }
@@ -244,6 +310,7 @@
             .section-heading { margin-bottom: 29px; }
             .about-visual { min-height: 280px; }
             .program-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
+            .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .program-card { min-height: unset; padding: 21px; }
             .program-icon { margin-bottom: 11px; }
             .discovery-card { grid-template-columns: auto minmax(0, 1fr); gap: 15px; padding: 20px; }
@@ -266,6 +333,50 @@
             .trust-item strong { font-size: .95rem; }
             .trust-item span:last-child { font-size: .76rem; }
             .program-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-card {
+                border: 1px solid rgba(23,104,75,.12);
+                border-radius: 24px;
+                box-shadow: 0 14px 34px rgba(23,77,58,.12);
+            }
+            .gallery-card-image {
+                height: 210px;
+                border-bottom: 4px solid #f7d37a;
+            }
+            .gallery-card:nth-child(2n) .gallery-card-image { border-bottom-color: #b7dcbf; }
+            .gallery-card:nth-child(3n) .gallery-card-image { border-bottom-color: #b9b8ed; }
+            .gallery-card-body {
+                padding: 18px;
+                background: linear-gradient(145deg, #fff 70%, #f4faf5);
+            }
+            .gallery-card h3 {
+                font-size: 1.2rem;
+                line-height: 1.25;
+            }
+            .gallery-card p { min-height: 0; }
+            .gallery-card .see-more {
+                width: 100%;
+                min-height: 50px;
+                justify-content: space-between;
+                padding: 7px 8px 7px 18px;
+                border-width: 1.5px;
+                border-radius: 16px;
+                background: linear-gradient(135deg, #17684b, #21865d);
+                color: var(--white);
+                box-shadow: 0 10px 22px rgba(23,104,75,.22);
+                animation: see-more-glow 2.8s ease-in-out infinite;
+            }
+            .gallery-card .see-more span {
+                width: 34px;
+                height: 34px;
+                background: var(--white);
+                color: var(--green);
+                transition: transform .25s ease, background .25s ease;
+            }
+            .gallery-card .see-more:active { transform: scale(.97); }
+            .gallery-card .see-more:active span { transform: translateX(3px) scale(.96); }
+            .gallery-detail-page { width: calc(100% - 16px); min-height: calc(100vh - 16px); margin: 8px auto; padding: 20px 16px; border-radius: 20px; }
+            .gallery-detail-media { columns: 1; }
             .staff-grid { grid-template-columns: 1fr; }
             .discovery-card { grid-template-columns: 1fr; justify-items: center; text-align: center; }
             .discovery-card .button { grid-column: auto; width: 100%; }
@@ -298,6 +409,7 @@
                 <a href="#home">Mwanzo</a>
                 <a href="#about">Kuhusu sisi</a>
                 <a href="#programs">Masomo</a>
+                <a href="#gallery">Gallery</a>
                 <a href="#admissions">Udahili</a>
                 <a href="#staff">Our Staff</a>
                 <a href="#contact" class="nav-cta">Wasiliana nasi</a>
@@ -388,6 +500,49 @@
                         <p id="discovery-description">Chagua rangi tatu unazoziona karibu nawe, kisha zitumie kuchora picha ya kitu unachokipenda.</p>
                     </div>
                     <button class="button" id="discovery-button" type="button">Wazo jingine <span aria-hidden="true">↻</span></button>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="gallery">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="eyebrow">School Gallery</span>
+                    <h2>Matukio na maisha ya kila siku shuleni.</h2>
+                    <p>Chunguza picha na video za kujifunza, utunzaji, safari na ubunifu wa watoto wetu.</p>
+                </div>
+                <div class="gallery-grid">
+                    <article class="gallery-card">
+                        <img class="gallery-card-image" src="./assets/daily-learning.jpeg" alt="Watoto wakijifunza darasani" loading="lazy">
+                        <div class="gallery-card-body">
+                            <h3>Daily Learning</h3>
+                            <p>Kujifunza kwa mchezo, hadithi na shughuli za vitendo kila siku.</p>
+                            <button class="see-more" type="button" data-gallery="learning">See more <span aria-hidden="true">→</span></button>
+                        </div>
+                    </article>
+                    <article class="gallery-card">
+                        <img class="gallery-card-image" src="./assets/daily-safety-care.jpeg" alt="Watoto wakijifunza na utunzaji darasani" loading="lazy">
+                        <div class="gallery-card-body">
+                            <h3>Daily Safety &amp; Care</h3>
+                            <p>Malezi ya upendo, usalama na uangalizi wa watoto kwenye mazingira ya shule.</p>
+                            <button class="see-more" type="button" data-gallery="care">See more <span aria-hidden="true">→</span></button>
+                        </div>
+                    </article>
+                    <article class="gallery-card">
+                        <img class="gallery-card-image" src="./assets/school-trip-excursion.jpg" alt="Watoto na mlezi wakicheza bwawani" loading="lazy">
+                        <div class="gallery-card-body">
+                            <h3>School Trip &amp; Excursion</h3>
+                            <p>Safari za kujifurahisha na kugundua mazingira mapya kwa usalama.</p>
+                            <button class="see-more" type="button" data-gallery="trip">See more <span aria-hidden="true">→</span></button>
+                        </div>
+                    </article>
+                    <article class="gallery-card">
+                        <img class="gallery-card-image" src="./assets/talent-show-creativity.jpeg" alt="Ubunifu wa uso uliotengenezwa kwa nyenzo za darasani" loading="lazy">
+                        <div class="gallery-card-body">
+                            <h3>Talent Show &amp; Creativity</h3>
+                            <p>Muziki, sanaa, hadithi na vipaji vya watoto vinavyochangamka.</p>
+                            <button class="see-more" type="button" data-gallery="talent">See more <span aria-hidden="true">→</span></button>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -487,6 +642,17 @@
             </div>
         </section>
     </main>
+    <div class="gallery-detail" id="gallery-detail" role="dialog" aria-modal="true" aria-labelledby="gallery-detail-title">
+        <div class="gallery-detail-page">
+            <header class="gallery-detail-header">
+                <button class="gallery-detail-back" type="button" aria-label="Rudi kwenye ukurasa mkuu" id="gallery-detail-back">←</button>
+                <span class="eyebrow">Happy Smile Gallery</span>
+                <h2 id="gallery-detail-title"></h2>
+                <p id="gallery-detail-description"></p>
+            </header>
+            <div class="gallery-detail-media" id="gallery-detail-media"></div>
+        </div>
+    </div>
     <footer>
         <div class="container footer-inner">
             <p>© <span id="year"></span> Happy Smile Day Care. Haki zote zimehifadhiwa.</p>
@@ -557,26 +723,141 @@
 
         document.getElementById('year').textContent = String(new Date().getFullYear());
 
+        const galleryDetails = {
+            learning: {
+                title: 'Daily Learning',
+                description: 'Watoto wetu wanajifunza kupitia michezo, hadithi, hesabu, sanaa na shughuli za vitendo. Kila siku tunahakikisha kujifunza kunakuwa chombo cha furaha na ugunduzi.',
+                enTitle: 'Daily Learning',
+                enDescription: 'Our children learn through games, stories, mathematics, art and practical activities. Every day we make learning a source of joy and discovery.',
+                media: [
+                    ['./assets/daily-learning.jpeg', 'image', 'Watoto wakijifunza darasani'],
+                    ['./assets/daily-learning-classroom.jpeg', 'image', 'Watoto wakijifunza na kuchora darasani'],
+                    ['./assets/daily-learning-activity-1.mp4', 'video', 'Shughuli ya kujifunza ya watoto'],
+                    ['./assets/daily-learning-activity-2.mp4', 'video', 'Mchezo na kujifunza darasani']
+                ]
+            },
+            care: {
+                title: 'Daily Safety & Care',
+                description: 'Utunzaji na usalama ni msingi wa kila siku. Wafanyakazi wetu hutoa malezi ya upendo, uangalizi wa karibu na nafasi ya watoto kujieleza kwa usalama.',
+                enTitle: 'Daily Safety & Care',
+                enDescription: 'Care and safety are the foundation of every day. Our staff provide loving care, close supervision and a safe space for children to express themselves.',
+                media: [
+                    ['./assets/daily-safety-care.jpeg', 'image', 'Watoto wakijifunza na utunzaji darasani'],
+                    ['./assets/daily-safety-learning.JPG', 'image', 'Malezi na usaidizi wakati wa kujifunza'],
+                    ['./assets/daily-safety-children.jpeg', 'image', 'Watoto wakifurahia mazingira ya shule'],
+                    ['./assets/daily-safety-care-1.mp4', 'video', 'Shughuli ya utunzaji na malezi'],
+                    ['./assets/daily-safety-care-2.mp4', 'video', 'Usalama na uangalizi wa watoto'],
+                    ['./assets/daily-safety-care-3.mp4', 'video', 'Watoto wakicheza kwa usalama']
+                ]
+            },
+            trip: {
+                title: 'School Trip & Excursion',
+                description: 'Safari na matembezi ya kielimu huwapa watoto nafasi ya kugundua dunia mpya, kujifunza kuhusu mazingira na kushirikiana kwa usalama.',
+                enTitle: 'School Trip & Excursion',
+                enDescription: 'Educational trips give children the chance to discover a new world, learn about their surroundings and work together safely.',
+                media: [
+                    ['./assets/school-trip-excursion.jpg', 'image', 'Watoto wakicheza bwawani na mlezi'],
+                    ['./assets/school-trip-meal.jpeg', 'image', 'Watoto wakifurahia chakula cha pamoja'],
+                    ['./assets/school-trip-rocks.JPG', 'image', 'Watoto wakicheza kwenye eneo la mawe'],
+                    ['./assets/school-trip-group.jpeg', 'image', 'Picha ya kikundi cha watoto'],
+                    ['./assets/school-trip-playground.jpeg', 'image', 'Watoto wakicheza katika eneo la michezo'],
+                    ['./assets/school-trip-rides.JPG', 'image', 'Watoto wakifurahia safari na michezo'],
+                    ['./assets/school-trip-pool.jpg', 'image', 'Watoto wakicheza kwenye bwawa'],
+                    ['./assets/school-trip-adventure.mov', 'video', 'Video ya safari na tukio la watoto']
+                ]
+            },
+            talent: {
+                title: 'Talent Show & Creativity',
+                description: 'Watoto huonyesha ubunifu kupitia uchoraji, muziki, ngoma, kuimba na hadithi. Tunasherehekea kila kipaji na kuzuia cheche ya kujiamini.',
+                enTitle: 'Talent Show & Creativity',
+                enDescription: 'Children express creativity through drawing, music, dance, singing and storytelling. We celebrate every talent and nurture confidence.',
+                media: [
+                    ['./assets/talent-show-creativity.jpeg', 'image', 'Ubunifu wa uso uliotengenezwa kwa nyenzo za darasani'],
+                    ['./assets/talent-mascot-art.jpg', 'image', 'Mchoro wa mascot kwenye notebook'],
+                    ['./assets/talent-leaf-art.jpeg', 'image', 'Mchoro wa kichaka na jicho la wanyama'],
+                    ['./assets/talent-show-1.mp4', 'video', 'Video ya onesho na ubunifu'],
+                    ['./assets/talent-show-2.mp4', 'video', 'Video ya kipaji na ubunifu wa watoto']
+                ]
+            }
+        };
+
+        const galleryDetail = document.getElementById('gallery-detail');
+        const detailTitle = document.getElementById('gallery-detail-title');
+        const detailDescription = document.getElementById('gallery-detail-description');
+        const detailMedia = document.getElementById('gallery-detail-media');
+
+        document.querySelectorAll('[data-gallery]').forEach((button) => {
+            button.addEventListener('click', () => {
+                const item = galleryDetails[button.dataset.gallery];
+                const english = document.documentElement.lang === 'en';
+                detailTitle.textContent = english ? item.enTitle : item.title;
+                detailDescription.textContent = english ? item.enDescription : item.description;
+                detailMedia.replaceChildren();
+                item.media.forEach(([src, type, alt]) => {
+                    const figure = document.createElement('figure');
+                    if (type === 'video') {
+                        const video = document.createElement('video');
+                        video.src = src;
+                        video.controls = true;
+                        video.playsInline = true;
+                        video.preload = 'metadata';
+                        video.setAttribute('aria-label', alt);
+                        figure.append(video);
+                    } else {
+                        const image = document.createElement('img');
+                        image.src = src;
+                        image.alt = alt;
+                        image.loading = 'lazy';
+                        figure.append(image);
+                    }
+                    detailMedia.append(figure);
+                });
+                galleryDetail.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                document.getElementById('gallery-detail-back').focus();
+            });
+        });
+
+        function closeGalleryDetail() {
+            galleryDetail.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.getElementById('gallery-detail-back').addEventListener('click', closeGalleryDetail);
+        galleryDetail.addEventListener('click', (event) => {
+            if (event.target === galleryDetail) closeGalleryDetail();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && galleryDetail.classList.contains('open')) closeGalleryDetail();
+        });
+
         const discoveryIdeas = [
             {
                 icon: '🎨',
                 title: 'Rangi za furaha',
-                description: 'Chagua rangi tatu unazoziona karibu nawe, kisha zitumie kuchora picha ya kitu unachokipenda.'
+                description: 'Chagua rangi tatu unazoziona karibu nawe, kisha zitumie kuchora picha ya kitu unachokipenda.',
+                enTitle: 'Colors of Joy',
+                enDescription: 'Choose three colors you see around you, then use them to draw a picture of something you love.'
             },
             {
                 icon: '🔎',
                 title: 'Msako wa maumbo',
-                description: 'Tafuta kitu chenye umbo la duara, mraba na pembetatu. Taja kila umbo kwa sauti.'
+                description: 'Tafuta kitu chenye umbo la duara, mraba na pembetatu. Taja kila umbo kwa sauti.',
+                enTitle: 'Shape Hunt',
+                enDescription: 'Find a round, square and triangular object. Say the name of each shape aloud.'
             },
             {
                 icon: '📖',
                 title: 'Hadithi ya picha',
-                description: 'Chagua picha unayoipenda na msimulie rafiki au mzazi hadithi fupi kuhusu kinachoendelea.'
+                description: 'Chagua picha unayoipenda na msimulie rafiki au mzazi hadithi fupi kuhusu kinachoendelea.',
+                enTitle: 'Picture Story',
+                enDescription: 'Choose a picture you like and tell a friend or parent a short story about what is happening.'
             },
             {
                 icon: '🕺',
                 title: 'Ngoma ya wanyama',
-                description: 'Tembea kama tembo, ruka kama chura, kisha nyoosha mabawa yako kama ndege!'
+                description: 'Tembea kama tembo, ruka kama chura, kisha nyoosha mabawa yako kama ndege!',
+                enTitle: 'Animal Dance',
+                enDescription: 'Walk like an elephant, jump like a frog, then stretch your wings like a bird!'
             }
         ];
         let discoveryIndex = 0;
@@ -584,8 +865,9 @@
             discoveryIndex = (discoveryIndex + 1) % discoveryIdeas.length;
             const idea = discoveryIdeas[discoveryIndex];
             document.getElementById('discovery-icon').textContent = idea.icon;
-            document.getElementById('discovery-title').textContent = idea.title;
-            document.getElementById('discovery-description').textContent = idea.description;
+            const english = document.documentElement.lang === 'en';
+            document.getElementById('discovery-title').textContent = english ? idea.enTitle : idea.title;
+            document.getElementById('discovery-description').textContent = english ? idea.enDescription : idea.description;
         });
 
         document.getElementById('admission-form').addEventListener('submit', (event) => {
@@ -593,7 +875,19 @@
             const form = event.currentTarget;
             const data = new FormData(form);
             const gender = form.querySelector('[name="gender"]').selectedOptions[0].textContent;
-            const message = [
+            const english = document.documentElement.lang === 'en';
+            const message = english ? [
+                `Dear team, ${data.get('parent_name')} is applying for admission to Happy Smile Day Care.`,
+                '',
+                'Application details:',
+                `Child's name: ${data.get('child_name')}`,
+                `Date of birth: ${data.get('dob')}`,
+                `Gender: ${gender === 'Mvulana' ? 'Boy' : gender === 'Msichana' ? 'Girl' : gender}`,
+                '',
+                `Parent or guardian name: ${data.get('parent_name')}`,
+                `Phone number: ${data.get('parent_phone')}`,
+                `Home area: ${data.get('address')}`
+            ].join('\n') : [
                 `Ndugu. ${data.get('parent_name')} anaomba nafasi ya udahili katika shule yako Happy Smile Day Care.`,
                 '',
                 'Taarifa za maombi:',
@@ -606,8 +900,9 @@
                 `Eneo anapoishi: ${data.get('address')}`
             ].join('\n');
             const whatsappUrl = `https://wa.me/255744412726?text=${encodeURIComponent(message)}`;
-            document.getElementById('admission-status').textContent =
-                `Hongera sana ${data.get('parent_name')}, umefanikiwa kutuma taarifa za maombi ya udahili kikamilifu.`;
+            document.getElementById('admission-status').textContent = english
+                ? `Congratulations ${data.get('parent_name')}, your admission application was sent successfully.`
+                : `Hongera sana ${data.get('parent_name')}, umefanikiwa kutuma taarifa za maombi ya udahili kikamilifu.`;
             window.location.href = whatsappUrl;
         });
 
@@ -615,7 +910,14 @@
             event.preventDefault();
             const form = event.currentTarget;
             const data = new FormData(form);
-            const message = [
+            const english = document.documentElement.lang === 'en';
+            const message = english ? [
+                'Happy Smile Day Care received the following message:',
+                `Name: ${data.get('name')}`,
+                `Email: ${data.get('email')}`,
+                '',
+                String(data.get('message'))
+            ].join('\n') : [
                 'Happy Smile Day Care tuna maombi yafuatayo:',
                 `Jina: ${data.get('name')}`,
                 `Barua pepe: ${data.get('email')}`,
@@ -623,8 +925,9 @@
                 String(data.get('message'))
             ].join('\n');
             const whatsappUrl = `https://wa.me/255744412726?text=${encodeURIComponent(message)}`;
-            document.getElementById('contact-status').textContent =
-                `Asante sana ${data.get('name')}, tumepokea ujumbe wako na tunaufanyia kazi.`;
+            document.getElementById('contact-status').textContent = english
+                ? `Thank you ${data.get('name')}, we received your message and will review it.`
+                : `Asante sana ${data.get('name')}, tumepokea ujumbe wako na tunaufanyia kazi.`;
             window.location.href = whatsappUrl;
         });
     </script>
